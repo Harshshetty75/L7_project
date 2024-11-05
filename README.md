@@ -20,8 +20,6 @@ This is a simple Python application for a fictional chocolate house that manages
 - Flask-SQLAlchemy
 - SQLite
 
-## Prerequisites
-- Python 3.10 or higher
 
 ## Installation and Setup
 
