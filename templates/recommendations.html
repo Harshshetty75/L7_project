@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Recommended Chocolates for {{ season }}</h2>
+    {% if recommended_flavors %}
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Brand</th>
+                    <th>Season</th>
+                    <th>Occasion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for flavor in recommended_flavors %}
+                    <tr>
+                        <td>{{ flavor.id }}</td>
+                        <td>{{ flavor.name }}</td>
+                        <td>{{ flavor.type }}</td>
+                        <td>{{ flavor.brand }}</td>
+                        <td>{{ flavor.season }}</td>
+                        <td>{{ flavor.occasion }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No recommended flavors for the selected season.</p>
+    {% endif %}
+{% endblock %}
