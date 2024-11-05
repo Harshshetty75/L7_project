@@ -17,7 +17,7 @@ body {
 header {
     text-align: center;
     padding: 10px 0;
-    background-color: #6200ea;
+    background-color: #03396c; /* Updated color */
     color: #ffffff;
     border-radius: 8px 8px 0 0;
 }
@@ -36,7 +36,7 @@ nav ul {
     padding: 0;
     display: flex;
     justify-content: space-around;
-    background-color: #6200ea;
+    background-color: #03396c; /* Updated color */
     border-radius: 8px;
 }
 
@@ -54,7 +54,7 @@ nav a {
 }
 
 nav a:hover {
-    background-color: #3700b3;
+    background-color: #022f54; /* Slightly darker shade for hover */
 }
 
 .flash-messages {
@@ -100,7 +100,7 @@ form label, form input, form select {
 }
 
 form input[type="submit"] {
-    background-color: #6200ea;
+    background-color: #03396c; /* Updated color */
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -108,7 +108,7 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-    background-color: #3700b3;
+    background-color: #022f54; /* Slightly darker shade for hover */
 }
 
 table {
@@ -124,7 +124,7 @@ table th, table td {
 }
 
 table th {
-    background-color: #6200ea;
+    background-color: #03396c; /* Updated color */
     color: #ffffff;
 }
 
