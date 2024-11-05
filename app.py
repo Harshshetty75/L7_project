@@ -46,12 +46,13 @@ def get_flavors():
 def add_flavor_form():
     """Form to add a new seasonal flavor."""
     if request.method == 'POST':
-        name = request.form.get('name')
-        season = request.form.get('season')
-        type_ = request.form.get('type')
-        brand = request.form.get('brand')
-        occasion = request.form.get('occasion')
+        name = request.form.get('name').strip()
+        season = request.form.get('season').strip()
+        type_ = request.form.get('type').strip()
+        brand = request.form.get('brand').strip()
+        occasion = request.form.get('occasion').strip() if request.form.get('occasion') else None
 
+        # Check if required fields are filled
         if not name or not season or not type_ or not brand:
             flash("All fields except 'Occasion' are required!", "danger")
             return redirect(url_for('add_flavor_form'))
@@ -62,6 +63,7 @@ def add_flavor_form():
             flash("A flavor with this name already exists. Please choose a different name.", "danger")
             return redirect(url_for('add_flavor_form'))
 
+        # Create and save the new flavor
         new_flavor = Flavor(name=name, season=season, type=type_, brand=brand, occasion=occasion)
         try:
             db.session.add(new_flavor)
@@ -73,6 +75,19 @@ def add_flavor_form():
         return redirect(url_for('get_flavors'))
     return render_template('add_flavor.html')
 
+@app.route('/delete_flavor/<int:id>', methods=['POST'])
+def delete_flavor(id):
+    """Delete a flavor by ID."""
+    flavor = Flavor.query.get_or_404(id)
+    try:
+        db.session.delete(flavor)
+        db.session.commit()
+        flash("Flavor deleted successfully!", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Error: {str(e)}", "danger")
+    return redirect(url_for('get_flavors'))
+
 @app.route('/get_ingredients', methods=['GET'])
 def get_ingredients():
     """Route to retrieve and display all ingredients."""
@@ -83,8 +98,8 @@ def get_ingredients():
 def add_ingredient_form():
     """Form to add a new ingredient."""
     if request.method == 'POST':
-        name = request.form.get('name')
-        quantity = request.form.get('quantity')
+        name = request.form.get('name').strip()
+        quantity = request.form.get('quantity').strip()
 
         if not name or not quantity or int(quantity) < 0:
             flash("Valid name and non-negative quantity are required!", "danger")
@@ -101,6 +116,19 @@ def add_ingredient_form():
         return redirect(url_for('get_ingredients'))
     return render_template('add_ingredient.html')
 
+@app.route('/delete_ingredient/<int:id>', methods=['POST'])
+def delete_ingredient(id):
+    """Delete an ingredient by ID."""
+    ingredient = Ingredient.query.get_or_404(id)
+    try:
+        db.session.delete(ingredient)
+        db.session.commit()
+        flash("Ingredient deleted successfully!", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Error: {str(e)}", "danger")
+    return redirect(url_for('get_ingredients'))
+
 @app.route('/get_suggestions', methods=['GET'])
 def get_suggestions():
     """Route to retrieve and display all customer flavor suggestions."""
@@ -111,8 +139,8 @@ def get_suggestions():
 def add_suggestion_form():
     """Form to add a new customer flavor suggestion."""
     if request.method == 'POST':
-        flavor = request.form.get('flavor')
-        allergy_info = request.form.get('allergy_info')
+        flavor = request.form.get('flavor').strip()
+        allergy_info = request.form.get('allergy_info').strip() if request.form.get('allergy_info') else None
 
         if not flavor:
             flash("Flavor is required!", "danger")
@@ -125,11 +153,24 @@ def add_suggestion_form():
         return redirect(url_for('get_suggestions'))
     return render_template('add_suggestion.html')
 
+@app.route('/delete_suggestion/<int:id>', methods=['POST'])
+def delete_suggestion(id):
+    """Delete a customer suggestion by ID."""
+    suggestion = Suggestion.query.get_or_404(id)
+    try:
+        db.session.delete(suggestion)
+        db.session.commit()
+        flash("Suggestion deleted successfully!", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(f"Error: {str(e)}", "danger")
+    return redirect(url_for('get_suggestions'))
+
 @app.route('/recommend_chocolates', methods=['GET', 'POST'])
 def recommend_chocolates():
     """Allow users to select a season and display recommended chocolates."""
     if request.method == 'POST':
-        selected_season = request.form.get('season')
+        selected_season = request.form.get('season').strip()
         recommended_flavors = Flavor.query.filter_by(season=selected_season).all()
 
         if not recommended_flavors:
@@ -140,3 +181,4 @@ def recommend_chocolates():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
