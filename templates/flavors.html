@@ -3,12 +3,16 @@
 {% block content %}
     <h2>Seasonal Flavors</h2>
     {% if flavors %}
-        <table border="1" cellpadding="5" cellspacing="0">
+        <table>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Season</th>
+                    <th>Type</th>
+                    <th>Brand</th>
+                    <th>Occasion</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +21,14 @@
                         <td>{{ flavor.id }}</td>
                         <td>{{ flavor.name }}</td>
                         <td>{{ flavor.season }}</td>
+                        <td>{{ flavor.type }}</td>
+                        <td>{{ flavor.brand }}</td>
+                        <td>{{ flavor.occasion or 'None' }}</td>
+                        <td>
+                            <form action="{{ url_for('delete_flavor', id=flavor.id) }}" method="post">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -25,3 +37,4 @@
         <p>No flavors available.</p>
     {% endif %}
 {% endblock %}
+
