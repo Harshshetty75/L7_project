@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Add a New Ingredient</h2>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        Name: <input type="text" name="name" required><br>
+        Quantity: <input type="number" name="quantity" min="0" required><br>
+        <input type="submit" value="Add Ingredient">
+    </form>
+{% endblock %}
