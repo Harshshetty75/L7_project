@@ -3,9 +3,12 @@
 {% block content %}
     <h2>Add a New Seasonal Flavor</h2>
     <form method="post">
-        
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" id="name" required>
+
         <label for="season">Season:</label>
         <select name="season" id="season" required>
+            <option value="" disabled selected>Select a Season</option>
             <option value="Winter">Winter</option>
             <option value="Spring">Spring</option>
             <option value="Summer">Summer</option>
@@ -14,6 +17,7 @@
 
         <label for="type">Type:</label>
         <select name="type" id="type" required>
+            <option value="" disabled selected>Select a Type</option>
             <option value="Milk Chocolate">Milk Chocolate</option>
             <option value="Dark Chocolate">Dark Chocolate</option>
             <option value="Sugar-Free">Sugar-Free</option>
@@ -22,6 +26,7 @@
 
         <label for="brand">Brand:</label>
         <select name="brand" id="brand" required>
+            <option value="" disabled selected>Select a Brand</option>
             <option value="Ferrero Rocher">Ferrero Rocher</option>
             <option value="Cadbury">Cadbury</option>
             <option value="Lindt">Lindt</option>
@@ -30,12 +35,13 @@
 
         <label for="occasion">Occasion (Optional):</label>
         <select name="occasion" id="occasion">
+            <option value="" disabled selected>None</option>
             <option value="Birthday">Birthday</option>
             <option value="Anniversary">Anniversary</option>
             <option value="Wedding">Wedding</option>
-            <option value="">None</option>
         </select>
 
         <input type="submit" value="Add Flavor">
     </form>
 {% endblock %}
+
