@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate House Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Chocolate House Management System</h1>
+        </header>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('get_flavors') }}">View Seasonal Flavors</a></li>
+                <li><a href="{{ url_for('add_flavor_form') }}">Add New Flavor</a></li>
+                <li><a href="{{ url_for('get_ingredients') }}">View Ingredients</a></li>
+                <li><a href="{{ url_for('add_ingredient_form') }}">Add New Ingredient</a></li>
+                <li><a href="{{ url_for('get_suggestions') }}">View Customer Suggestions</a></li>
+                <li><a href="{{ url_for('add_suggestion_form') }}">Add New Suggestion</a></li>
+                <li><a href="{{ url_for('recommend_chocolates') }}">Get Recommendations</a></li>
+            </ul>
+        </nav>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
