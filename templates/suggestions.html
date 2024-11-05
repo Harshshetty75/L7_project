@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Customer Suggestions</h2>
+    {% if suggestions %}
+        <ul>
+            {% for suggestion in suggestions %}
+                <li>ID: {{ suggestion[0] }}, Flavor: {{ suggestion[1] }}, Allergy Info: {{ suggestion[2] or 'N/A' }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No suggestions available.</p>
+    {% endif %}
+{% endblock %}
