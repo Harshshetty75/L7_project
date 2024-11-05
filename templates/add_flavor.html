@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Add a New Seasonal Flavor</h2>
+    <form method="post">
+        
+        <label for="season">Season:</label>
+        <select name="season" id="season" required>
+            <option value="Winter">Winter</option>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+            <option value="Autumn">Autumn</option>
+        </select>
+
+        <label for="type">Type:</label>
+        <select name="type" id="type" required>
+            <option value="Milk Chocolate">Milk Chocolate</option>
+            <option value="Dark Chocolate">Dark Chocolate</option>
+            <option value="Sugar-Free">Sugar-Free</option>
+            <option value="Handmade">Handmade</option>
+        </select>
+
+        <label for="brand">Brand:</label>
+        <select name="brand" id="brand" required>
+            <option value="Ferrero Rocher">Ferrero Rocher</option>
+            <option value="Cadbury">Cadbury</option>
+            <option value="Lindt">Lindt</option>
+            <option value="Hershey's">Hershey's</option>
+        </select>
+
+        <label for="occasion">Occasion (Optional):</label>
+        <select name="occasion" id="occasion">
+            <option value="Birthday">Birthday</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Wedding">Wedding</option>
+            <option value="">None</option>
+        </select>
+
+        <input type="submit" value="Add Flavor">
+    </form>
+{% endblock %}
