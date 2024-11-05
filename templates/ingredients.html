@@ -1,14 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Ingredients</h2>
+    <h2>Ingredient Inventory</h2>
     {% if ingredients %}
-        <ul>
-            {% for ingredient in ingredients %}
-                <li>ID: {{ ingredient[0] }}, Name: {{ ingredient[1] }}, Quantity: {{ ingredient[2] }}</li>
-            {% endfor %}
-        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient in ingredients %}
+                    <tr>
+                        <td>{{ ingredient.id }}</td>
+                        <td>{{ ingredient.name }}</td>
+                        <td>{{ ingredient.quantity }}</td>
+                        <td>
+                            <form action="{{ url_for('delete_ingredient', id=ingredient.id) }}" method="post">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>No ingredients available.</p>
     {% endif %}
 {% endblock %}
+
