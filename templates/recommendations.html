@@ -1,35 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Customer Suggestions</h2>
-    {% if suggestions %}
-        <table>
+    <h2>Recommended Chocolates for {{ season }}</h2>
+    {% if recommended_flavors %}
+        <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Flavor</th>
-                    <th>Allergy Info</th>
-                    <th>Actions</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Brand</th>
+                    <th>Season</th>
+                    <th>Occasion</th>
                 </tr>
             </thead>
             <tbody>
-                {% for suggestion in suggestions %}
+                {% for flavor in recommended_flavors %}
                     <tr>
-                        <td>{{ suggestion.id }}</td>
-                        <td>{{ suggestion.flavor }}</td>
-                        <td>{{ suggestion.allergy_info or 'None' }}</td>
-                        <td>
-                            <form action="{{ url_for('delete_suggestion', id=suggestion.id) }}" method="post">
-                                <input type="submit" value="Delete">
-                            </form>
-                        </td>
+                        <td>{{ flavor.id }}</td>
+                        <td>{{ flavor.name }}</td>
+                        <td>{{ flavor.type }}</td>
+                        <td>{{ flavor.brand }}</td>
+                        <td>{{ flavor.season }}</td>
+                        <td>{{ flavor.occasion }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <p>No suggestions available.</p>
+        <p>No recommended flavors for the selected season.</p>
     {% endif %}
 {% endblock %}
+
 
 
