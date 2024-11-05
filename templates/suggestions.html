@@ -3,11 +3,30 @@
 {% block content %}
     <h2>Customer Suggestions</h2>
     {% if suggestions %}
-        <ul>
-            {% for suggestion in suggestions %}
-                <li>ID: {{ suggestion[0] }}, Flavor: {{ suggestion[1] }}, Allergy Info: {{ suggestion[2] or 'N/A' }}</li>
-            {% endfor %}
-        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Flavor</th>
+                    <th>Allergy Info</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for suggestion in suggestions %}
+                    <tr>
+                        <td>{{ suggestion.id }}</td>
+                        <td>{{ suggestion.flavor }}</td>
+                        <td>{{ suggestion.allergy_info or 'None' }}</td>
+                        <td>
+                            <form action="{{ url_for('delete_suggestion', id=suggestion.id) }}" method="post">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>No suggestions available.</p>
     {% endif %}
