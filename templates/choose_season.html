@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Select a Season to Get Chocolate Recommendations</h2>
+    <form method="post">
+        <label for="season">Choose a season:</label>
+        <select name="season" id="season" required>
+            <option value="Winter">Winter</option>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+            <option value="Autumn">Autumn</option>
+        </select>
+        <input type="submit" value="Get Recommendations">
+    </form>
+{% endblock %}
